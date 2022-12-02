@@ -1,4 +1,4 @@
-from typing import Optional, Literal, Tuple
+from typing import Optional, Tuple
 
 inp: str = open('2022/inputs/d2.txt').read()
 rounds = [i.split() for i in inp.split('\n')]
@@ -15,7 +15,7 @@ def get_outcome(opp: str, me: str) -> Optional[bool]:
         status = True
     elif ('ABC'.index(opp) - 1) == 'XYZ'.index(me) or ((opp, me) == ('A', 'Z')):
         status = False
-    return status
+    return status  # type: ignore
 
 print(sum((moves.get(me) + outcome.get(get_outcome(opp, me))) for opp, me in rounds))
 
@@ -24,7 +24,7 @@ print(sum((moves.get(me) + outcome.get(get_outcome(opp, me))) for opp, me in rou
 wins = {'A': 'Y', 'B': 'Z', 'C': 'X',}
 lose = {'A': 'Z', 'B': 'X', 'C': 'Y',}
 
-def get_move(opp: str, end: str) -> Tuple[Literal['X', 'Y', 'Z'], Optional[bool]]:
+def get_move(opp: str, end: str) -> Tuple[str, Optional[bool]]:  # type: ignore
     result = {'X': False, 'Y': None, 'Z': True}
     end: Optional[bool] = result.get(end)
 
